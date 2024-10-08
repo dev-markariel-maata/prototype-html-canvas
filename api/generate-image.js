@@ -3,15 +3,18 @@ const multer = require('multer');
 const fs = require('fs');
 
 // Set up multer for image upload handling
-const upload = multer({ dest: '/tmp/' });  // Use /tmp/ in serverless environments
+const upload = multer({ 
+    dest: '/tmp/', 
+    limits: { fileSize: 4 * 1024 * 1024 } // 4 MB file size limit
+});
 
 // Main handler function for Vercel
 module.exports = (req, res) => {
     if (req.method === 'POST') {
         upload.single('image')(req, res, async (err) => {
             if (err) {
-                console.error('Multer error:', err); // Log the error for debugging
-                return res.status(500).send('Error uploading image.');
+                console.error('Multer error:', err); // Log Multer error
+                return res.status(500).send(`Error uploading image: ${err.message}`);
             }
 
             const canvas = createCanvas(1080, 1080);
