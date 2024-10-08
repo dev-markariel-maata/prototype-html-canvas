@@ -2,16 +2,16 @@ const { createCanvas, loadImage } = require('canvas');
 const multer = require('multer');
 const fs = require('fs');
 
-// Set up multer for image upload handling
+// Set up multer to store files in memory
+const storage = multer.memoryStorage();
 const upload = multer({ 
-    dest: '/tmp/', 
+    storage, 
     limits: { fileSize: 4 * 1024 * 1024 } // 4 MB file size limit
 });
 
 // Main handler function for Vercel
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
-        // Wrap multer's upload in a promise to handle async properly
         await new Promise((resolve, reject) => {
             upload.single('image')(req, res, (err) => {
                 if (err) {
@@ -27,9 +27,8 @@ module.exports = async (req, res) => {
         const ctx = canvas.getContext('2d');
 
         try {
-            // Load the uploaded image
-            const imagePath = req.file.path;
-            const image = await loadImage(fs.readFileSync(imagePath));
+            // Load the uploaded image from memory buffer
+            const image = await loadImage(req.file.buffer);
 
             // Draw the image on the canvas
             ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
@@ -60,8 +59,6 @@ module.exports = async (req, res) => {
             res.setHeader('Content-Type', 'image/png');
             canvas.createPNGStream().pipe(res);
 
-            // Clean up the uploaded image file
-            fs.unlinkSync(imagePath);
         } catch (err) {
             console.error(err);
             res.status(500).send('Error generating image.');
