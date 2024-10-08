@@ -2,7 +2,6 @@
     "functions": {
         "api/generate-image": {
             "maxDuration": 10,
-            "maxMemory": 1024,
             "memory": 300,
             "maxRequestSize": "20mb"
         }
