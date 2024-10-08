@@ -10,7 +10,7 @@ const upload = multer({
 });
 
 
-registerFont('./fonts/Roboto-Regular.ttf', { family: 'Roboto' });
+registerFont('./public/fonts/Roboto-Regular.ttf', { family: 'Roboto' });
 
 // Main handler function for Vercel
 module.exports = async (req, res) => {
