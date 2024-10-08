@@ -1,7 +1,6 @@
 const { createCanvas, loadImage } = require('canvas');
 const multer = require('multer');
 const fs = require('fs');
-const path = require('path');
 
 // Set up multer for image upload handling
 const upload = multer({ dest: '/tmp/' });  // Use /tmp/ in serverless environments
@@ -11,12 +10,13 @@ module.exports = (req, res) => {
     if (req.method === 'POST') {
         upload.single('image')(req, res, async (err) => {
             if (err) {
+                console.error('Multer error:', err); // Log the error for debugging
                 return res.status(500).send('Error uploading image.');
             }
 
             const canvas = createCanvas(1080, 1080);
             const ctx = canvas.getContext('2d');
-    
+
             try {
                 // Load the uploaded image
                 const imagePath = req.file.path;
@@ -25,7 +25,7 @@ module.exports = (req, res) => {
                 // Draw the image on the canvas
                 ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-                // Set text properties and overlay text as needed (similar to original code)
+                // Set text properties and overlay text as needed
                 const fontSize = 60;
                 ctx.font = `${fontSize}px Arial`;
                 ctx.textAlign = "center";
