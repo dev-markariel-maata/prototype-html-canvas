@@ -9,6 +9,9 @@ const upload = multer({
     limits: { fileSize: 4 * 1024 * 1024 } // 4 MB file size limit
 });
 
+
+registerFont('../fonts/Roboto-Regular.ttf', { family: 'Roboto' });
+
 // Main handler function for Vercel
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
@@ -35,7 +38,7 @@ module.exports = async (req, res) => {
 
             // Set text properties and overlay text as needed
             const fontSize = 60;
-            // ctx.font = `${fontSize}px sans-serif`;
+            ctx.font = `${fontSize}px 'Roboto'`; // Use the registered font
             ctx.textAlign = "center";
             ctx.textBaseline = "top";
 
