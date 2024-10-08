@@ -1,6 +1,7 @@
 const { createCanvas, loadImage, registerFont } = require('canvas');
 const multer = require('multer');
 const fs = require('fs');
+const { join } = require('path')
 
 // Set up multer to store files in memory
 const storage = multer.memoryStorage();
@@ -10,7 +11,7 @@ const upload = multer({
 });
 
 
-registerFont('./fonts/Roboto-Regular.ttf', { family: 'Roboto' });
+registerFont(join(__dirname, '_files/fonts/Roboto-Regular.ttf'), { family: 'Roboto' });
 
 // Main handler function for Vercel
 module.exports = async (req, res) => {
