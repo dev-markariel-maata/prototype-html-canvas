@@ -33,7 +33,7 @@ app.post('/generate-image', upload.single('image'), async (req, res) => {
 
         // Set text properties
         const fontSize = 60;
-        ctx.font = `${fontSize}px sans-serif`;
+        // ctx.font = `${fontSize}px sans-serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
 
