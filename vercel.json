@@ -1,9 +1,0 @@
-{
-    "functions": {
-        "api/generate-image": {
-            "maxDuration": 10,
-            "memory": 300,
-            "maxRequestSize": "20mb"
-        }
-    }
-}
