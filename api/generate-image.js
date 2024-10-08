@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
 
             // Set text properties and overlay text as needed
             const fontSize = 60;
-            ctx.font = `${fontSize}px`;
+            ctx.font = `${fontSize}px Arial, sans-serif`;
             ctx.textAlign = "center";
             ctx.textBaseline = "top";
 
