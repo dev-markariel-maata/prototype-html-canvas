@@ -12,26 +12,26 @@ const upload = multer({
 // Main handler function for Vercel
 module.exports = async (req, res) => {
     if (req.method === 'POST') {
-        await new Promise((resolve, reject) => {
-            upload.single('image')(req, res, (err) => {
-                if (err) {
-                    console.error('Multer error:', err); // Log Multer error
-                    res.status(500).send(`Error uploading image: ${err.message}`);
-                    return reject(err);
-                }
-                resolve();
-            });
-        });
+        // await new Promise((resolve, reject) => {
+        //     upload.single('image')(req, res, (err) => {
+        //         if (err) {
+        //             console.error('Multer error:', err); // Log Multer error
+        //             res.status(500).send(`Error uploading image: ${err.message}`);
+        //             return reject(err);
+        //         }
+        //         resolve();
+        //     });
+        // });
 
         const canvas = createCanvas(1080, 1080);
         const ctx = canvas.getContext('2d');
 
         try {
             // Load the uploaded image from memory buffer
-            const image = await loadImage(req.file.buffer);
+            // const image = await loadImage(req.file.buffer);
 
-            // Draw the image on the canvas
-            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+            // // Draw the image on the canvas
+            // ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
             // Set text properties and overlay text as needed
             const fontSize = 60;
