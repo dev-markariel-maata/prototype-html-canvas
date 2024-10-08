@@ -11,7 +11,7 @@ const upload = multer({
 });
 
 
-registerFont(join(__dirname, '_files/fonts/Roboto-Regular.ttf'), { family: 'Roboto' });
+registerFont(join(__dirname, '_files/fonts/NotoSansJP.ttf'), { family: 'NotoSansJP' });
 
 // Main handler function for Vercel
 module.exports = async (req, res) => {
@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
 
             // Set text properties and overlay text as needed
             const fontSize = 60;
-            ctx.font = `${fontSize}px 'Roboto'`; // Use the registered font
+            ctx.font = `${fontSize}px 'NotoSansJP'`; // Use the registered font
             ctx.textAlign = "center";
             ctx.textBaseline = "top";
 
